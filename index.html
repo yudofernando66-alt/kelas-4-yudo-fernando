@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPAS Kelas 4 - Akar dan Fungsinya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #81c784;
+            --primary-dark: #1b5e20;
+            --secondary: #f9a825;
+            --secondary-light: #fff59d;
+            --accent: #ff7043;
+            --bg-color: #f1f8e9;
+            --card-bg: #ffffff;
+            --text-color: #263238;
+            --text-muted: #546e7a;
+            --shadow: 0 8px 20px rgba(0,0,0,0.08);
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            background: rgba(255,255,255,0.2);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .logo-text h1 {
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .nav-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 6px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* SIDE NAV DRAWER */
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-drawer.open {
+            left: 0;
+        }
+
+        .drawer-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-menu {
+            list-style: none;
+            padding: 15px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .drawer-menu li {
+            margin-bottom: 8px;
+        }
+
+        .drawer-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+
+        .drawer-menu a:hover, .drawer-menu a.active {
+            background: #e8f5e9;
+            color: var(--primary-dark);
+        }
+
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .backdrop.active {
+            display: block;
+        }
+
+        /* MAIN LAYOUT */
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .section-page {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section-page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* UI CARDS & BUTTONS */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            border-bottom: 2px dashed #a5d6a7;
+            padding-bottom: 10px;
+        }
+
+        .card-header-icon {
+            font-size: 28px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(46,125,50,0.3);
+            transition: all 0.2s;
+            text-decoration: none;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: #333;
+            box-shadow: 0 4px 10px rgba(249,168,37,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: #f57f17;
+            color: white;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            box-shadow: 0 4px 10px rgba(255,112,67,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 600px) {
+            .grid-2 { grid-template-columns: 1fr 1fr; }
+            .btn { width: auto; }
+        }
+
+        /* BERANDA STYLES */
+        .hero-banner {
+            text-align: center;
+            background: linear-gradient(180deg, #e8f5e9 0%, #ffffff 100%);
+            border-radius: var(--radius);
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #c8e6c9;
+        }
+
+        .hero-banner h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .hero-banner p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .hero-illustration {
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (min-width: 600px) {
+            .menu-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .menu-card:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-4px);
+        }
+
+        .menu-card .icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .menu-card h4 {
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+        }
+
+        /* SVG ROOT ANIMATION & GRAPHICS */
+        .svg-container {
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .interactive-part {
+            cursor: pointer;
+            transition: transform 0.2s, fill 0.2s;
+        }
+
+        .interactive-part:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+        }
+
+        /* MODAL POPUP */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* COMPARISON TABLE */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .compare-table th, .compare-table td {
+            border: 1px solid #c8e6c9;
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .compare-table th {
+            background: #e8f5e9;
+            color: var(--primary-dark);
+        }
+
+        /* QUIZ & ACTIVITIES */
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            border: 2px solid #cfd8dc;
+            background: white;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: #f1f8e9;
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: #e8f5e9;
+        }
+
+        .option-btn.correct {
+            border-color: #2e7d32;
+            background: #c8e6c9;
+            color: #1b5e20;
+        }
+
+        .option-btn.wrong {
+            border-color: #c62828;
+            background: #ffcdd2;
+            color: #b71c1c;
+        }
+
+        .feedback-box {
+            margin-top: 15px;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            display: none;
+        }
+
+        .feedback-box.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback-box.wrong {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* EMOJI RATING */
+        .emoji-group {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+        }
+
+        .emoji-btn {
+            font-size: 32px;
+            background: none;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.2s;
+        }
+
+        .emoji-btn:hover, .emoji-btn.active {
+            transform: scale(1.3);
+            border-color: var(--secondary);
+            background: var(--secondary-light);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--primary-dark);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cfd8dc;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            background: var(--primary);
+        }
+
+        /* PROGRESS BAR */
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0 20px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #e8f5e9;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+            border-top: 1px solid #c8e6c9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">🌱</div>
+            <div class="logo-text">
+                <h1>IPAS Kelas 4 SD</h1>
+                <p>Bagian Tumbuhan: Akar & Fungsinya</p>
+            </div>
+        </div>
+        <button class="nav-toggle" onclick="toggleNav()">☰</button>
+    </header>
+
+    <!-- BACKDROP & SIDE DRAWER -->
+    <div class="backdrop" id="backdrop" onclick="toggleNav()"></div>
+    <nav class="nav-drawer" id="navDrawer">
+        <div class="drawer-header">
+            <h3>Menu Pembelajaran</h3>
+            <span style="cursor:pointer; font-size: 24px;" onclick="toggleNav()">✕</span>
+        </div>
+        <ul class="drawer-menu">
+            <li><a href="#" onclick="navigateTo('beranda')">🏠 Beranda</a></li>
+            <li><a href="#" onclick="navigateTo('asesmen-awal')">📋 Asesmen Diagnostik</a></li>
+            <li><a href="#" onclick="navigateTo('tujuan')">🎯 Tujuan Pembelajaran</a></li>
+            <li><a href="#" onclick="navigateTo('mengenal-akar')">🌱 Mengenal Akar</a></li>
+            <li><a href="#" onclick="navigateTo('bagian-akar')">🔎 Bagian-bagian Akar</a></li>
+            <li><a href="#" onclick="navigateTo('fungsi-akar')">💧 Fungsi Akar</a></li>
+            <li><a href="#" onclick="navigateTo('jenis-akar')">🌿 Jenis-jenis Akar</a></li>
+            <li><a href="#" onclick="navigateTo('aktivitas')">🎮 Aktivitas Interaktif</a></li>
+            <li><a href="#" onclick="navigateTo('petualangan')">🤠 Petualangan Akar</a></li>
+            <li><a href="#" onclick="navigateTo('kuis')">🧠 Kuis Evaluasi</a></li>
+            <li><a href="#" onclick="navigateTo('hasil')">📊 Hasil Belajar</a></li>
+            <li><a href="#" onclick="navigateTo('refleksi')">💭 Refleksi Siswa</a></li>
+            <li><a href="#" onclick="navigateTo('profil')">🌟 Profil Pelajar Pancasila</a></li>
+            <li><a href="#" onclick="navigateTo('guru')">👨‍🏫 Menu Guru</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <main id="mainContent">
+
+        <!-- 1. BERANDA -->
+        <section id="beranda" class="section-page active">
+            <div class="hero-banner">
+                <span class="badge">IPAS Kelas 4 SD</span>
+                <h2 style="margin-top:10px;">Petualangan Mengenal Akar Tumbuhan! 🌿</h2>
+                <p>Yuk pelajari bagaimana akar bekerja menjaga tumbuhan tetap berdiri kokoh dan sehat!</p>
+                
+                <!-- SVG HERO ANIMATION -->
+                <svg class="hero-illustration" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="90" fill="#e8f5e9"/>
+                    <!-- Batang & Daun -->
+                    <path d="M100,100 L100,40" stroke="#2e7d32" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M100,60 Q130,40 140,60 Q110,80 100,60" fill="#4caf50"/>
+                    <path d="M100,80 Q70,60 60,80 Q90,100 100,80" fill="#4caf50"/>
+                    <!-- Tanah Line -->
+                    <line x1="30" y1="100" x2="170" y2="100" stroke="#795548" stroke-width="6" stroke-linecap="round"/>
+                    <!-- Akar Utama -->
+                    <path d="M100,100 Q105,130 100,170" stroke="#8d6e63" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    <!-- Cabang Akar -->
+                    <path d="M102,120 Q125,130 135,140" stroke="#8d6e63" stroke-width="4" fill="none"/>
+                    <path d="M98,135 Q75,145 65,155" stroke="#8d6e63" stroke-width="4" fill="none"/>
+                    <path d="M100,150 Q120,160 125,170" stroke="#8d6e63" stroke-width="3" fill="none"/>
+                </svg>
+
+                <button class="btn btn-secondary" onclick="navigateTo('asesmen-awal')" style="font-size: 1.1rem;">🚀 Mulai Belajar Sekarang!</button>
+            </div>
+
+            <h3 style="margin-bottom:12px; color:var(--primary-dark);">Pilih Menu Belajar:</h3>
+            <div class="menu-grid">
+                <div class="menu-card" onclick="navigateTo('mengenal-akar')">
+                    <div class="icon">🌱</div>
+                    <h4>Mengenal Akar</h4>
+                </div>
+                <div class="menu-card" onclick="navigateTo('bagian-akar')">
+                    <div class="icon">🔎</div>
+                    <h4>Bagian Akar</h4>
+                </div>
+                <div class="menu-card" onclick="navigateTo('fungsi-akar')">
+                    <div class="icon">💧</div>
+                    <h4>Fungsi Akar</h4>
+                </div>
+                <div class="menu-card" onclick="navigateTo('jenis-akar')">
+                    <div class="icon">🌿</div>
+                    <h4>Jenis Akar</h4>
+                </div>
+                <div class="menu-card" onclick="navigateTo('aktivitas')">
+                    <div class="icon">🎮</div>
+                    <h4>Aktivitas</h4>
+                </div>
+                <div class="menu-card" onclick="navigateTo('kuis')">
+                    <div class="icon">🧠</div>
+                    <h4>Kuis</h4>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 25px; font-weight: 700; color: var(--primary);">"Belajar IPAS itu seru dan menyenangkan! ✨"</p>
+        </section>
+
+        <!-- 2. ASESMEN DIAGNOSTIK -->
+        <section id="asesmen-awal" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">📋</span>
+                    <h2 class="card-title">Asesmen Diagnostik Awal</h2>
+                </div>
+                <p style="margin-bottom: 15px;">Sebelum mulai, yuk jawab 5 pertanyaan singkat ini untuk mengetahui seberapa tahu kamu tentang akar tumbuhan!</p>
+                
+                <div id="diagnosticContainer"></div>
+
+                <button class="btn" id="btnSubmitDiagnostic" onclick="submitDiagnostic()">Kirim Jawaban & Lanjut Belajar ➔</button>
+            </div>
+        </section>
+
+        <!-- 3. TUJUAN PEMBELAJARAN -->
+        <section id="tujuan" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">🎯</span>
+                    <h2 class="card-title">Tujuan Pembelajaran</h2>
+                </div>
+                <p><strong>Capaian Pembelajaran (CP):</strong> Peserta didik menganalisis hubungan antara bentuk serta fungsi bagian tubuh pada tumbuhan (akar).</p>
+                
+                <div style="background: #e8f5e9; padding: 15px; border-radius: 12px; margin: 15px 0;">
+                    <h4 style="color: var(--primary-dark); margin-bottom: 8px;">Target Belajarku Hari Ini:</h4>
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li>🌱 Mengenal apa itu akar tumbuhan.</li>
+                        <li>🔎 Menyebutkan bagian-bagian akar.</li>
+                        <li>💧 Menjelaskan fungsi akar bagi tumbuhan.</li>
+                        <li>🌿 Membedakan akar tunggang dan akar serabut.</li>
+                        <li>❤️ Menunjukkan sikap peduli terhadap tumbuhan sekitar.</li>
+                    </ul>
+                </div>
+
+                <button class="btn" onclick="navigateTo('mengenal-akar')">Mulai Materi 1: Mengenal Akar ➔</button>
+            </div>
+        </section>
+
+        <!-- 4. MATERI 1: MENGENAL AKAR -->
+        <section id="mengenal-akar" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">🌱</span>
+                    <h2 class="card-title">Materi 1: Mengenal Akar</h2>
+                </div>
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px;">
+                    <strong>Akar</strong> adalah bagian tumbuhan yang umumnya berada <strong>di dalam tanah</strong>. Akar membantu tumbuhan berdiri tegak dan menyerap air serta mineral yang ada di dalam tanah.
+                </p>
+
+                <div style="text-align: center; background: #fff8e1; padding: 15px; border-radius: 12px; border: 1px solid #ffe082; margin-bottom: 20px;">
+                    <p>👇 <strong>Klik bagian akar di bawah ini untuk melihat kejutan informasi!</strong></p>
+                </div>
+
+                <!-- INTERACTIVE SVG ROOT -->
+                <svg class="svg-container" viewBox="0 0 300 300">
+                    <rect x="0" y="0" width="300" height="120" fill="#e8f5e9"/>
+                    <rect x="0" y="120" width="300" height="180" fill="#d7ccc8"/>
+                    <text x="15" y="140" fill="#5d4037" font-weight="bold" font-size="14">Area Dalam Tanah</text>
+                    
+                    <!-- Batang -->
+                    <rect x="140" y="40" width="20" height="80" fill="#8d6e63"/>
+                    <path d="M130,50 Q100,30 90,50 Q120,70 130,50" fill="#4caf50"/>
+                    <path d="M170,50 Q200,30 210,50 Q180,70 170,50" fill="#4caf50"/>
+
+                    <!-- Interactive Root Parts -->
+                    <g class="interactive-part" onclick="showModal('Akar Utama', 'Bagian akar paling besar yang tumbuh lurus ke bawah pada akar tunggang.')">
+                        <path d="M150,120 L150,250" stroke="#5d4037" stroke-width="10" stroke-linecap="round"/>
+                        <circle cx="150" cy="180" r="14" fill="#ff7043"/>
+                        <text x="170" y="185" fill="#3e2723" font-weight="bold" font-size="12">Klik: Akar Utama</text>
+                    </g>
+
+                    <g class="interactive-part" onclick="showModal('Rambut Akar', 'Bulut-bulu halus yang bertugas menyerap air dan mineral dari dalam tanah.')">
+                        <path d="M150,150 Q190,160 210,165" stroke="#8d6e63" stroke-width="4" fill="none"/>
+                        <path d="M150,200 Q110,210 90,215" stroke="#8d6e63" stroke-width="4" fill="none"/>
+                        <circle cx="210" cy="165" r="10" fill="#f9a825"/>
+                        <text x="215" y="160" fill="#3e2723" font-weight="bold" font-size="12">Klik: Rambut Akar</text>
+                    </g>
+
+                    <g class="interactive-part" onclick="showModal('Tudung Akar (Kaliptra)', 'Ujung akar yang melindungi akar saat menembus tanah keras.')">
+                        <path d="M142,250 L158,250 L150,270 Z" fill="#2e7d32"/>
+                        <circle cx="150" cy="260" r="10" fill="#2e7d32"/>
+                        <text x="170" y="265" fill="#3e2723" font-weight="bold" font-size="12">Klik: Tudung Akar</text>
+                    </g>
+                </svg>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-outline" onclick="navigateTo('tujuan')">◀ Kembali</button>
+                    <button class="btn" onclick="navigateTo('bagian-akar')">Materi 2: Bagian Akar ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MATERI 2: BAGIAN-BAGIAN AKAR -->
+        <section id="bagian-akar" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">🔎</span>
+                    <h2 class="card-title">Materi 2: Bagian-Bagian Akar</h2>
+                </div>
+                <p style="margin-bottom:15px;">Akar terdiri dari beberapa bagian penting yang bekerja sama:</p>
+
+                <div class="grid-2">
+                    <div style="background:#f1f8e9; padding:15px; border-radius:12px; border-left:5px solid var(--primary);">
+                        <h4>1. Tudung Akar (Kaliptra)</h4>
+                        <p style="font-size:0.95rem; color:var(--text-muted); margin-top:5px;">Berada di paling ujung. Berfungsi melindungi ujung akar agar tidak rusak saat menembus tanah.</p>
+                    </div>
+                    <div style="background:#fffde7; padding:15px; border-radius:12px; border-left:5px solid var(--secondary);">
+                        <h4>2. Rambut Akar</h4>
+                        <p style="font-size:0.95rem; color:var(--text-muted); margin-top:5px;">Rambut-rambut halus yang berfungsi memperluas daerah penyerapan air dan mineral.</p>
+                    </div>
+                    <div style="background:#fbe9e7; padding:15px; border-radius:12px; border-left:5px solid var(--accent);">
+                        <h4>3. Batang / Akar Utama</h4>
+                        <p style="font-size:0.95rem; color:var(--text-muted); margin-top:5px;">Bagian tengah akar yang menghubungkan akar dengan batang tumbuhan.</p>
+                    </div>
+                    <div style="background:#e8eaf6; padding:15px; border-radius:12px; border-left:5px solid #3f51b5;">
+                        <h4>4. Cabang Akar</h4>
+                        <p style="font-size:0.95rem; color:var(--text-muted); margin-top:5px;">Akar yang tumbuh keluar dari akar utama untuk memperkokoh cengkeraman ke tanah.</p>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-outline" onclick="navigateTo('mengenal-akar')">◀ Sebelumnya</button>
+                    <button class="btn" onclick="navigateTo('fungsi-akar')">Materi 3: Fungsi Akar ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. MATERI 3: FUNGSI AKAR -->
+        <section id="fungsi-akar" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">💧</span>
+                    <h2 class="card-title">Materi 3: 5 Fungsi Utama Akar</h2>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="background:white; border:2px solid #c8e6c9; padding:14px; border-radius:12px;">
+                        <strong>1. Menyerap Air dan Mineral 💧</strong>
+                        <p>Akar menyerap air dan zat hara/mineral dari dalam tanah untuk disalurkan ke daun.</p>
+                    </div>
+                    <div style="background:white; border:2px solid #c8e6c9; padding:14px; border-radius:12px;">
+                        <strong>2. Menopang Tumbuhan 🏛️</strong>
+                        <p>Menancap kuat di dalam tanah agar tumbuhan berdiri kokoh dan tidak roboh tertiup angin.</p>
+                    </div>
+                    <div style="background:white; border:2px solid #c8e6c9; padding:14px; border-radius:12px;">
+                        <strong>3. Menyimpan Cadangan Makanan 🥕</strong>
+                        <p>Pada tumbuhan tertentu, akar menjadi tempat menyimpan makanan. Contoh: <strong>Singkong, Wortel, Ubi Jalar, Lobak</strong>.</p>
+                    </div>
+                    <div style="background:white; border:2px solid #c8e6c9; padding:14px; border-radius:12px;">
+                        <strong>4. Tempat Bernapas (Alat Pernapasan) 🌬️</strong>
+                        <p>Pada pohon bakau (mangrove), akar napas tumbuh ke atas tanah untuk mengambil oksigen.</p>
+                    </div>
+                    <div style="background:white; border:2px solid #c8e6c9; padding:14px; border-radius:12px;">
+                        <strong>5. Perkembangbiakan Tumbuhan 🌱</strong>
+                        <p>Beberapa tumbuhan dapat berkembang biak dengan akar, contohnya sukun dan cemara.</p>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-outline" onclick="navigateTo('bagian-akar')">◀ Sebelumnya</button>
+                    <button class="btn" onclick="navigateTo('jenis-akar')">Materi 4: Jenis Akar ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. MATERI 4: JENIS-JENIS AKAR -->
+        <section id="jenis-akar" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">🌿</span>
+                    <h2 class="card-title">Materi 4: Jenis-Jenis Akar</h2>
+                </div>
+                <p style="margin-bottom:15px;">Secara umum, jenis akar dibagi menjadi 2 kelompok utama:</p>
+
+                <div class="grid-2">
+                    <div style="background:#e8f5e9; padding:16px; border-radius:14px; text-align:center;">
+                        <h3>🌳 Akar Tunggang</h3>
+                        <p style="font-size:0.9rem; margin:8px 0;">Memiliki 1 akar utama yang besar dan tumbuh lurus ke dalam tanah, dilengkapi cabang akar kecil.</p>
+                        <p><strong>Contoh Tumbuhan:</strong><br>Mangga, Jambu, Wortel, Kacang Tanah, Rambutan.</p>
+                    </div>
+                    <div style="background:#fff3e0; padding:16px; border-radius:14px; text-align:center;">
+                        <h3>🌾 Akar Serabut</h3>
+                        <p style="font-size:0.9rem; margin:8px 0;">Tidak memiliki akar utama. Akar berbentuk serabut halus berukuran hampir sama dari pangkal batang.</p>
+                        <p><strong>Contoh Tumbuhan:</strong><br>Padi, Jagung, Rumput, Kelapa, Bawang.</p>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="toggleCompareTable()" style="margin-top:20px;">📊 Klik Untuk Bandingkan Langsung</button>
+
+                <div id="compareTableContainer" style="display:none; margin-top:15px;">
+                    <table class="compare-table">
+                        <thead>
+                            <tr>
+                                <th>Ciri-ciri</th>
+                                <th>Akar Tunggang</th>
+                                <th>Akar Serabut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Akar Utama</td>
+                                <td>Ada (ukuran besar)</td>
+                                <td>Tidak ada</td>
+                            </tr>
+                            <tr>
+                                <td>Bentuk Akar</td>
+                                <td>Bercabang dari akar utama</td>
+                                <td>Kumpulan serabut halus</td>
+                            </tr>
+                            <tr>
+                                <td>Jenis Tumbuhan</td>
+                                <td>Tumbuhan Dikotil (Biji berkeping dua)</td>
+                                <td>Tumbuhan Monokotil (Biji berkeping satu)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-outline" onclick="navigateTo('fungsi-akar')">◀ Sebelumnya</button>
+                    <button class="btn" onclick="navigateTo('aktivitas')">Lanjut ke Aktivitas Interaktif ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. AKTIVITAS INTERAKTIF -->
+        <section id="aktivitas" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">🎮</span>
+                    <h2 class="card-title">Aktivitas Interaktif</h2>
+                </div>
+                
+                <h4 style="margin-bottom:10px; color:var(--primary-dark);">Aktivitas 1: Tebak Jenis Akar!</h4>
+                <p>Tumbuhan <strong>Mangga</strong> memiliki akar utama yang menancap kuat dan besar ke bawah tanah. Apa jenis akarnya?</p>
+                <div style="margin:12px 0;">
+                    <button class="option-btn" onclick="checkActivity1('tunggang', this)">🌳 Akar Tunggang</button>
+                    <button class="option-btn" onclick="checkActivity1('serabut', this)">🌾 Akar Serabut</button>
+                </div>
+                <div id="act1Feedback" class="feedback-box"></div>
+
+                <hr style="margin:25px 0; border:1px dashed #c8e6c9;">
+
+                <h4 style="margin-bottom:10px; color:var(--primary-dark);">Aktivitas 2: Pasangkan Tumbuhan dengan Akarnya!</h4>
+                <p>Pilih jenis akar yang cocok untuk tumbuhan <strong>Jagung</strong>:</p>
+                <div style="margin:12px 0;">
+                    <button class="option-btn" onclick="checkActivity2('tunggang', this)">🌳 Akar Tunggang</button>
+                    <button class="option-btn" onclick="checkActivity2('serabut', this)">🌾 Akar Serabut</button>
+                </div>
+                <div id="act2Feedback" class="feedback-box"></div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:25px;">
+                    <button class="btn btn-outline" onclick="navigateTo('jenis-akar')">◀ Kembali ke Materi</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('petualangan')">Main Petualangan Akar 🤠➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. GAME: PETUALANGAN AKAR -->
+        <section id="petualangan" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">🤠</span>
+                    <h2 class="card-title">Game: Petualangan Akar</h2>
+                </div>
+                
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <span>Level: <strong id="gameLevelText">1 / 5</strong></span>
+                    <span>Poin Pertualangan: <strong id="gameScoreText" style="color:var(--secondary); font-size:1.2rem;">0</strong> ⭐</span>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="gameProgressBar"></div>
+                </div>
+
+                <div id="gameContent">
+                    <!-- Game Level Dynamic Content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. KUIS EVALUASI -->
+        <section id="kuis" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">🧠</span>
+                    <h2 class="card-title">Kuis Evaluasi IPAS</h2>
+                </div>
+                <p style="margin-bottom:15px;">Jawab pertanyaan di bawah ini dengan cermat ya!</p>
+
+                <div id="quizContainer">
+                    <!-- Dynamic Quiz Content -->
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <button class="btn btn-outline" id="btnPrevQuiz" onclick="prevQuestion()" style="display:none;">◀ Soal Sebelumnya</button>
+                    <button class="btn" id="btnNextQuiz" onclick="nextQuestion()">Soal Berikutnya ➔</button>
+                    <button class="btn btn-secondary" id="btnSubmitQuiz" onclick="finishQuiz()" style="display:none;">Selesai & Lihat Hasil 🎉</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. HASIL BELAJAR -->
+        <section id="hasil" class="section-page">
+            <div class="card" style="text-align:center;">
+                <div class="card-header" style="justify-content:center;">
+                    <span class="card-header-icon">📊</span>
+                    <h2 class="card-title">Hasil Belajar Kamu</h2>
+                </div>
+
+                <div style="font-size:70px; margin:10px 0;" id="resultEmoji">🏆</div>
+                <h3 id="resultNameDisplay" style="color:var(--primary-dark);">Nama Siswa</h3>
+                <p id="resultClassDisplay">Kelas 4 SD</p>
+
+                <div style="background:#e8f5e9; padding:20px; border-radius:16px; margin:20px 0;">
+                    <p style="font-size:1.1rem;">Nilai Akhir Kuis:</p>
+                    <h1 id="resultScore" style="font-size:3.5rem; color:var(--primary); margin:5px 0;">0</h1>
+                    <p id="resultCategory" style="font-weight:700; font-size:1.2rem; color:var(--secondary-dark);">Kategori: -</p>
+                    <p style="margin-top:10px; font-size:0.95rem;" id="resultStats">Benar: 0 | Salah: 0</p>
+                </div>
+
+                <div style="background:#f1f8e9; padding:15px; border-radius:12px; text-align:left; margin-bottom:20px;" id="resultFeedback">
+                    <!-- Feedback Text -->
+                </div>
+
+                <button class="btn" onclick="navigateTo('refleksi')">Lanjut ke Refleksi Siswa 💭➔</button>
+            </div>
+        </section>
+
+        <!-- 12. REFLEKSI SISWA -->
+        <section id="refleksi" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">💭</span>
+                    <h2 class="card-title">Refleksi Belajar Siswa</h2>
+                </div>
+                <p>Bagaimana perasaanmu setelah belajar tentang akar hari ini?</p>
+
+                <div class="emoji-group">
+                    <button class="emoji-btn" onclick="selectEmoji('Sangat Paham 😀', this)">😀</button>
+                    <button class="emoji-btn" onclick="selectEmoji('Paham 🙂', this)">🙂</button>
+                    <button class="emoji-btn" onclick="selectEmoji('Perlu Belajar 😐', this)">😐</button>
+                    <button class="emoji-btn" onclick="selectEmoji('Belum Paham 😟', this)">😟</button>
+                </div>
+
+                <div class="form-group">
+                    <label>1. Apa hal baru yang kamu pelajari hari ini?</label>
+                    <textarea id="ref1" rows="2" placeholder="Tuliskan di sini..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>2. Apa fungsi akar yang paling kamu ingat?</label>
+                    <textarea id="ref2" rows="2" placeholder="Tuliskan di sini..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>3. Bagian mana yang masih membuatmu ragu/bingung?</label>
+                    <textarea id="ref3" rows="2" placeholder="Tuliskan di sini..."></textarea>
+                </div>
+
+                <button class="btn btn-secondary" onclick="submitReflection()">Simpan Refleksi & Kirim Nilai ke Guru 📤</button>
+            </div>
+        </section>
+
+        <!-- 13. PROFIL PELAJAR PANCASILA -->
+        <section id="profil" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">🌟</span>
+                    <h2 class="card-title">Dimensi Profil Pelajar Pancasila</h2>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="background:#e8f5e9; padding:12px; border-radius:10px;">
+                        <strong>🌱 Penalaran Kritis:</strong> Siswa mampu membandingkan ciri akar tunggang dan serabut.
+                    </div>
+                    <div style="background:#e8f5e9; padding:12px; border-radius:10px;">
+                        <strong>🔎 Penalaran Ilmiah:</strong> Mengamati dan mengaitkan bentuk akar dengan fungsi penyerapan air.
+                    </div>
+                    <div style="background:#e8f5e9; padding:12px; border-radius:10px;">
+                        <strong>🌍 Peduli Lingkungan:</strong> Memahami betapa pentingnya menjaga kelestarian akar dan tumbuhan.
+                    </div>
+                    <div style="background:#e8f5e9; padding:12px; border-radius:10px;">
+                        <strong>💡 Mandiri:</strong> Menyelesaikan kuis dan aktivitas belajar secara konsisten.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. MENU GURU -->
+        <section id="guru" class="section-page">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-header-icon">👨‍🏫</span>
+                    <h2 class="card-title">Dashboard Guru IPAS</h2>
+                </div>
+                <p style="margin-bottom:15px;">Kelola tautan Google Sheets, Google Docs Materi, dan LKPD Digital di sini:</p>
+
+                <div class="form-group">
+                    <label>URL Web App Google Apps Script (Pengiriman Data):</label>
+                    <input type="text" id="inputAppsScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+                </div>
+
+                <div class="form-group">
+                    <label>URL Google Sheets Hasil Belajar:</label>
+                    <input type="text" id="inputSheetsUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
+                </div>
+
+                <div class="form-group">
+                    <label>URL Google Docs Materi Guru:</label>
+                    <input type="text" id="inputDocsUrl" placeholder="https://docs.google.com/document/d/...">
+                </div>
+
+                <div class="form-group">
+                    <label>URL LKPD Digital:</label>
+                    <input type="text" id="inputLkpdUrl" placeholder="https://docs.google.com/document/d/...">
+                </div>
+
+                <button class="btn" onclick="saveTeacherConfig()">Simpan Konfigurasi Tautan 💾</button>
+
+                <hr style="margin:20px 0; border:1px solid #e0e0e0;">
+
+                <h4 style="margin-bottom:12px;">Akses Cepat Dokumen:</h4>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <a href="#" id="btnOpenSheets" target="_blank" class="btn btn-secondary">📊 Buka Google Sheets Data Siswa</a>
+                    <a href="#" id="btnOpenDocs" target="_blank" class="btn btn-outline">📖 Buka Materi Guru (Google Docs)</a>
+                    <a href="#" id="btnOpenLkpd" target="_blank" class="btn btn-outline">📝 Buka LKPD Digital (Google Docs)</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL POPUP -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <h3 id="modalTitle" style="color:var(--primary-dark); margin-bottom:10px;">Judul</h3>
+            <p id="modalBody" style="margin-bottom:20px; color:var(--text-color);">Isi informasi...</p>
+            <button class="btn" onclick="closeModal()">Tutup Informasi</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Media Pembelajaran IPAS Kelas 4 SD &copy; Kurikulum Merdeka</p>
+    </footer>
+
+    <!-- JAVASCRIPT CODE -->
+    <script>
+        // ==========================================
+        // KONFIGURASI UTAMA GURU (BISA DIUBAH DI SINI)
+        // ==========================================
+        let GOOGLE_APPS_SCRIPT_URL = "MASUKKAN_URL_GOOGLE_APPS_SCRIPT_DI_SINI";
+        let GOOGLE_SHEETS_URL = "MASUKKAN_URL_GOOGLE_SHEETS_DI_SINI";
+        let GOOGLE_DOCS_URL = "MASUKKAN_URL_GOOGLE_DOCS_DI_SINI";
+        let LKPD_URL = "MASUKKAN_URL_LKPD_DI_SINI";
+
+        // APP STATE
+        let studentData = {
+            name: "",
+            class: "4 SD",
+            diagnosticAnswers: [],
+            quizAnswers: {},
+            quizScore: 0,
+            correctCount: 0,
+            wrongCount: 0,
+            reflectionEmoji: "",
+            reflectionText: []
+        };
+
+        // DIAGNOSTIC QUESTIONS
+        const diagnosticQuestions = [
+            "1. Di manakah biasanya bagian akar tumbuhan berada?",
+            "2. Sebutkan satu fungsi akar yang kamu ketahui!",
+            "3. Apakah semua tumbuhan memiliki jenis akar yang sama?",
+            "4. Apa perbedaan tumbuhan berakar besar dan berakar serabut halus?",
+            "5. Tumbuhan apa di sekitarmu yang paling kamu sukai?"
+        ];
+
+        // QUIZ DATA (10 PG + 5 BENAR/SALAH = 15 SOAL)
+        const quizData = [
+            // 10 Pilihan Ganda
+            { id: 1, type: "mc", q: "Bagian tumbuhan yang berada di dalam tanah dan berfungsi menyerap air adalah...", options: ["A. Daun", "B. Batang", "C. Akar", "D. Bunga"], ans: 2 },
+            { id: 2, type: "mc", q: "Akar yang memiliki satu akar utama berukuran besar disebut akar...", options: ["A. Serabut", "B. Tunggang", "C. Napas", "D. Pelekat"], ans: 1 },
+            { id: 3, type: "mc", q: "Berikut ini tumbuhan yang memiliki akar serabut adalah...", options: ["A. Mangga", "B. Jambu", "C. Padi", "D. Rambutan"], ans: 2 },
+            { id: 4, type: "mc", q: "Bagian ujung akar yang berfungsi melindungi akar saat menembus tanah dinamakan...", options: ["A. Rambut akar", "B. Tudung akar (Kaliptra)", "C. Batang akar", "D. Inti akar"], ans: 1 },
+            { id: 5, type: "mc", q: "Tanaman singkong memanfaatkan akarnya untuk...", options: ["A. Menyimpan cadangan makanan", "B. Bernapas saja", "C. Berbunga", "D. Menangkap serangga"], ans: 0 },
+            { id: 6, type: "mc", q: "Fungsi dari rambut-rambut halus pada akar adalah...", options: ["A. Mempercantik akar", "B. Memperluas bidang penyerapan air", "C. Mengusir hama", "D. Menghasilkan biji"], ans: 1 },
+            { id: 7, type: "mc", q: "Tumbuhan jagung dan kelapa dikelompokkan dalam tumbuhan berakar...", options: ["A. Tunggang", "B. Serabut", "C. Gantung", "D. Tunjang"], ans: 1 },
+            { id: 8, type: "mc", q: "Mengapa pohon besar tidak mudah roboh saat ditiup angin?", options: ["A. Daunnya lebat", "B. Akarnya cengkeram kuat tanah", "C. Buahnya banyak", "D. Batangnya tinggi"], ans: 1 },
+            { id: 9, type: "mc", q: "Wortel dan lobak adalah contoh modifikasi akar untuk...", options: ["A. Mengapung", "B. Menyimpan cadangan makanan", "C. Melekat di tembok", "D. Menyerap udara"], ans: 1 },
+            { id: 10, type: "mc", q: "Sikap peduli lingkungan terhadap keberadaan akar tumbuhan adalah...", options: ["A. Mencabut tanaman sembarangan", "B. Menyiram dan menjaga tanah tempat tumbuh", "C. Merusak tanah sekitar akar", "D. Menginjaki tanaman kecil"], ans: 1 },
+            
+            // 5 Benar / Salah
+            { id: 11, type: "tf", q: "Akar serabut tidak memiliki akar utama yang dominan.", options: ["Benar", "Salah"], ans: 0 },
+            { id: 12, type: "tf", q: "Semua jenis tumbuhan menyerap air melalui daunnya.", options: ["Benar", "Salah"], ans: 1 },
+            { id: 13, type: "tf", q: "Pohon mangga memiliki sistem perakaran tunggang.", options: ["Benar", "Salah"], ans: 0 },
+            { id: 14, type: "tf", q: "Kaliptra bertugas mempercantik warna akar.", options: ["Benar", "Salah"], ans: 1 },
+            { id: 15, type: "tf", q: "Menjaga tumbuhan tetap hidup adalah bukti rasa syukur kepada Tuhan.", options: ["Benar", "Salah"], ans: 0 }
+        ];
+
+        let currentQuizIndex = 0;
+
+        // PETUALANGAN GAME DATA
+        const gameLevels = [
+            { level: 1, title: "Mengenal Akar", q: "Manakah letak sebagian besar akar tumbuhan?", options: ["Di dalam tanah", "Di atas udara"], ans: 0 },
+            { level: 2, title: "Fungsi Akar", q: "Apa tugas utama rambut akar?", options: ["Menyerap air & mineral", "Membuat biji baru"], ans: 0 },
+            { level: 3, title: "Jenis Akar", q: "Akar padi berbentuk serabut halus. Benar atau Salah?", options: ["Benar", "Salah"], ans: 0 },
+            { level: 4, title: "Pengelompokan", q: "Pilih tumbuhan berakar tunggang:", options: ["Pohon Jambu", "Rumput Lapangan"], ans: 0 },
+            { level: 5, title: "Tantangan Akhir", q: "Tanaman apa yang menyimpan makanan di akarnya?", options: ["Singkong", "Pisang"], ans: 0 }
+        ];
+        let currentGameLevel = 0;
+        let gameScore = 0;
+
+        // INITIALIZATION
+        window.onload = function() {
+            renderDiagnostic();
+            renderQuizQuestion(0);
+            renderGameLevel(0);
+            loadTeacherConfig();
+        };
+
+        // NAVIGATION
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.section-page').forEach(sec => sec.classList.remove('active'));
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.add('active');
+            
+            // Close Drawer
+            document.getElementById('navDrawer').classList.remove('open');
+            document.getElementById('backdrop').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleNav() {
+            document.getElementById('navDrawer').classList.toggle('open');
+            document.getElementById('backdrop').classList.toggle('active');
+        }
+
+        // MODAL
+        function showModal(title, text) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = text;
+            document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        // ASESMEN DIAGNOSTIK
+        function renderDiagnostic() {
+            const container = document.getElementById('diagnosticContainer');
+            container.innerHTML = `
+                <div class="form-group">
+                    <label>Nama Lengkap Siswa:</label>
+                    <input type="text" id="studentNameInput" placeholder="Ketik nama lengkapmu di sini...">
+                </div>
+            `;
+            diagnosticQuestions.forEach((q, idx) => {
+                container.innerHTML += `
+                    <div class="form-group">
+                        <label>${q}</label>
+                        <input type="text" id="diag_${idx}" placeholder="Jawaban singkatmu...">
+                    </div>
+                `;
+            });
+        }
+
+        function submitDiagnostic() {
+            const name = document.getElementById('studentNameInput').value.trim();
+            if (!name) {
+                alert("Harap isi nama lengkapmu terlebih dahulu ya! 😊");
+                return;
+            }
+            studentData.name = name;
+
+            let answers = [];
+            for (let i = 0; i < diagnosticQuestions.length; i++) {
+                answers.push(document.getElementById(`diag_${i}`).value.trim());
+            }
+            studentData.diagnosticAnswers = answers;
+
+            alert(`Terima kasih ${name}! Mari kita mulai petualangan belajar! 🚀`);
+            navigateTo('tujuan');
+        }
+
+        // COMPARISON TABLE TOGGLE
+        function toggleCompareTable() {
+            const el = document.getElementById('compareTableContainer');
+            el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+        }
+
+        // ACTIVITIES
+        function checkActivity1(ans, btn) {
+            const fb = document.getElementById('act1Feedback');
+            fb.style.display = 'block';
+            if (ans === 'tunggang') {
+                fb.className = 'feedback-box correct';
+                fb.innerText = 'Hebat! Jawabanmu BENAR 🎉 Mangga memiliki akar tunggang dengan akar utama yang kuat.';
+            } else {
+                fb.className = 'feedback-box wrong';
+                fb.innerText = 'Hampir tepat! Coba ingat lagi, mangga adalah pohon besar dengan akar utama lurus ke tanah.';
+            }
+        }
+
+        function checkActivity2(ans, btn) {
+            const fb = document.getElementById('act2Feedback');
+            fb.style.display = 'block';
+            if (ans === 'serabut') {
+                fb.className = 'feedback-box correct';
+                fb.innerText = 'Luar Biasa! Jawabanmu TEPAT ✨ Jagung memiliki sistem akar serabut.';
+            } else {
+                fb.className = 'feedback-box wrong';
+                fb.innerText = 'Yuk coba lagi! Jagung tidak memiliki satu akar utama yang dominan.';
+            }
+        }
+
+        // GAME PETUALANGAN AKAR
+        function renderGameLevel(idx) {
+            if (idx >= gameLevels.length) {
+                document.getElementById('gameContent').innerHTML = `
+                    <div style="text-align:center; padding:20px;">
+                        <h3>🎉 Selamat! Kamu Menyelesaikan Petualangan Akar!</h3>
+                        <p style="font-size:1.1rem; margin:10px 0;">Total Poin Pertualanganmu: <strong>${gameScore} ⭐</strong></p>
+                        <button class="btn" onclick="navigateTo('kuis')">Lanjut Mengerjakan Kuis Evaluasi 🧠➔</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const lvl = gameLevels[idx];
+            document.getElementById('gameLevelText').innerText = `${lvl.level} / ${gameLevels.length}`;
+            document.getElementById('gameProgressBar').style.width = `${(lvl.level / gameLevels.length) * 100}%`;
+
+            let optionsHtml = '';
+            lvl.options.forEach((opt, oIdx) => {
+                optionsHtml += `<button class="option-btn" onclick="answerGame(${oIdx})">${opt}</button>`;
+            });
+
+            document.getElementById('gameContent').innerHTML = `
+                <div style="background:#e8f5e9; padding:15px; border-radius:12px; margin-bottom:15px;">
+                    <h4 style="color:var(--primary-dark);">Tantangan Level ${lvl.level}: ${lvl.title}</h4>
+                    <p style="margin-top:5px; font-size:1.05rem;">${lvl.q}</p>
+                </div>
+                <div>${optionsHtml}</div>
+            `;
+        }
+
+        function answerGame(optIdx) {
+            const lvl = gameLevels[currentGameLevel];
+            if (optIdx === lvl.ans) {
+                gameScore += 20;
+                document.getElementById('gameScoreText').innerText = gameScore;
+                alert("Jawaban Benar! +20 Poin ⭐");
+            } else {
+                alert("Belum tepat, tapi semangat terus ya!");
+            }
+            currentGameLevel++;
+            renderGameLevel(currentGameLevel);
+        }
+
+        // KUIS EVALUASI
+        function renderQuizQuestion(idx) {
+            const container = document.getElementById('quizContainer');
+            const item = quizData[idx];
+
+            let optionsHtml = '';
+            item.options.forEach((opt, oIdx) => {
+                const isSelected = studentData.quizAnswers[item.id] === oIdx ? 'selected' : '';
+                optionsHtml += `
+                    <button class="option-btn ${isSelected}" onclick="selectQuizAnswer(${item.id}, ${oIdx}, this)">
+                        ${opt}
+                    </button>
+                `;
+            });
+
+            container.innerHTML = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                    <span class="badge">Soal ${idx + 1} dari ${quizData.length}</span>
+                </div>
+                <h4 style="font-size:1.1rem; margin-bottom:15px;">${item.q}</h4>
+                <div>${optionsHtml}</div>
+            `;
+
+            // Button controls
+            document.getElementById('btnPrevQuiz').style.display = idx > 0 ? 'inline-flex' : 'none';
+            if (idx === quizData.length - 1) {
+                document.getElementById('btnNextQuiz').style.display = 'none';
+                document.getElementById('btnSubmitQuiz').style.display = 'inline-flex';
+            } else {
+                document.getElementById('btnNextQuiz').style.display = 'inline-flex';
+                document.getElementById('btnSubmitQuiz').style.display = 'none';
+            }
+        }
+
+        function selectQuizAnswer(questionId, optionIndex, btn) {
+            studentData.quizAnswers[questionId] = optionIndex;
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
+        function nextQuestion() {
+            if (currentQuizIndex < quizData.length - 1) {
+                currentQuizIndex++;
+                renderQuizQuestion(currentQuizIndex);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                renderQuizQuestion(currentQuizIndex);
+            }
+        }
+
+        function finishQuiz() {
+            let correct = 0;
+            quizData.forEach(item => {
+                if (studentData.quizAnswers[item.id] === item.ans) {
+                    correct++;
+                }
+            });
+
+            const total = quizData.length;
+            const score = Math.round((correct / total) * 100);
+            
+            studentData.correctCount = correct;
+            studentData.wrongCount = total - correct;
+            studentData.quizScore = score;
+
+            // Render Result Page
+            document.getElementById('resultNameDisplay').innerText = studentData.name || "Siswa IPAS";
+            document.getElementById('resultScore').innerText = score;
+            document.getElementById('resultStats').innerText = `Jumlah Benar: ${correct} | Jumlah Salah: ${total - correct}`;
+
+            let category = "";
+            let feedback = "";
+            let emoji = "🏆";
+
+            if (score >= 90) {
+                category = "Sangat Baik ✨";
+                feedback = "Hebat sekali! Kamu sudah menguasai seluruh materi bagian dan fungsi akar tumbuhan dengan sempurna.";
+                emoji = "🌟";
+            } else if (score >= 80) {
+                category = "Baik 👍";
+                feedback = "Bagus sekali! Pemahamanmu tentang akar tumbuhan sudah baik. Pertahankan prestasimu!";
+                emoji = "👏";
+            } else if (score >= 70) {
+                category = "Cukup 🙂";
+                feedback = "Hasil yang cukup baik! Kamu bisa membaca ulang materi tentang perbedaan akar tunggang dan serabut agar semakin paham.";
+                emoji = "📚";
+            } else {
+                category = "Perlu Bimbingan 💡";
+                feedback = "Jangan berkecil hati ya! Yuk baca kembali materi dan coba jalankan game petualangan lagi.";
+                emoji = "💪";
+            }
+
+            document.getElementById('resultCategory').innerText = `Kategori: ${category}`;
+            document.getElementById('resultFeedback').innerHTML = `<strong>Umpan Balik Guru:</strong><br>${feedback}`;
+            document.getElementById('resultEmoji').innerText = emoji;
+
+            navigateTo('hasil');
+        }
+
+        // REFLEKSI & INTEGRASI
+        function selectEmoji(val, btn) {
+            studentData.reflectionEmoji = val;
+            document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function submitReflection() {
+            const r1 = document.getElementById('ref1').value.trim();
+            const r2 = document.getElementById('ref2').value.trim();
+            const r3 = document.getElementById('ref3').value.trim();
+
+            studentData.reflectionText = [r1, r2, r3];
+
+            // Send to Google Sheets via Fetch API
+            sendDataToGoogleSheets();
+        }
+
+        function sendDataToGoogleSheets() {
+            if (!GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL.includes("MASUKKAN_URL")) {
+                alert("Refleksi tersimpan secara lokal! (Catatan Guru: Masukkan URL Web App Google Apps Script di Menu Guru untuk pengiriman otomatis ke Sheets).");
+                return;
+            }
+
+            const payload = {
+                timestamp: new Date().toLocaleString("id-ID"),
+                nama: studentData.name || "Anonim",
+                kelas: studentData.class,
+                skor: studentData.quizScore,
+                benar: studentData.correctCount,
+                salah: studentData.wrongCount,
+                asesmenAwal: studentData.diagnosticAnswers.join(" | "),
+                refleksiEmoji: studentData.reflectionEmoji,
+                refleksiDetail: studentData.reflectionText.join(" | "),
+                status: studentData.quizScore >= 70 ? "Tuntas" : "Perlu Bimbingan"
+            };
+
+            fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert("🎉 Selamat! Seluruh hasil belajar dan refleksimu telah berhasil dikirim ke Guru!");
+            }).catch(err => {
+                console.error("Gagal mengirim data:", err);
+                alert("Hasil tersimpan di perangkat lokal. Koneksi internet mungkin terganggu.");
+            });
+        }
+
+        // TEACHER CONFIG
+        function saveTeacherConfig() {
+            const scriptUrl = document.getElementById('inputAppsScriptUrl').value.trim();
+            const sheetsUrl = document.getElementById('inputSheetsUrl').value.trim();
+            const docsUrl = document.getElementById('inputDocsUrl').value.trim();
+            const lkpdUrl = document.getElementById('inputLkpdUrl').value.trim();
+
+            if (scriptUrl) GOOGLE_APPS_SCRIPT_URL = scriptUrl;
+            if (sheetsUrl) GOOGLE_SHEETS_URL = sheetsUrl;
+            if (docsUrl) GOOGLE_DOCS_URL = docsUrl;
+            if (lkpdUrl) LKPD_URL = lkpdUrl;
+
+            localStorage.setItem("ipas_config", JSON.stringify({
+                scriptUrl, sheetsUrl, docsUrl, lkpdUrl
+            }));
+
+            updateTeacherLinks();
+            alert("Konfigurasi tautan berhasil disimpan! 💾");
+        }
+
+        function loadTeacherConfig() {
+            const saved = localStorage.getItem("ipas_config");
+            if (saved) {
+                const cfg = JSON.parse(saved);
+                if (cfg.scriptUrl) GOOGLE_APPS_SCRIPT_URL = cfg.scriptUrl;
+                if (cfg.sheetsUrl) GOOGLE_SHEETS_URL = cfg.sheetsUrl;
+                if (cfg.docsUrl) GOOGLE_DOCS_URL = cfg.docsUrl;
+                if (cfg.lkpdUrl) LKPD_URL = cfg.lkpdUrl;
+
+                document.getElementById('inputAppsScriptUrl').value = GOOGLE_APPS_SCRIPT_URL;
+                document.getElementById('inputSheetsUrl').value = GOOGLE_SHEETS_URL;
+                document.getElementById('inputDocsUrl').value = GOOGLE_DOCS_URL;
+                document.getElementById('inputLkpdUrl').value = LKPD_URL;
+            }
+            updateTeacherLinks();
+        }
+
+        function updateTeacherLinks() {
+            document.getElementById('btnOpenSheets').href = GOOGLE_SHEETS_URL.includes("MASUKKAN") ? "#" : GOOGLE_SHEETS_URL;
+            document.getElementById('btnOpenDocs').href = GOOGLE_DOCS_URL.includes("MASUKKAN") ? "#" : GOOGLE_DOCS_URL;
+            document.getElementById('btnOpenLkpd').href = LKPD_URL.includes("MASUKKAN") ? "#" : LKPD_URL;
+        }
+    </script>
+</body>
+</html>
